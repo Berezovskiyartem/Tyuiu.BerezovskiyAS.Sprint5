@@ -8,7 +8,8 @@ namespace Tyuiu.BerezovskiyAS.Sprint5.Task2.V25.Test
         [TestMethod]
         public void TestMethod1()
         {
-            string path = $@"D:\source\repos\Tyuiu.BerezovskiyAS.Sprint5\Tyuiu.BerezovskiyAS.Sprint5.Task2.V25\bin\Debug\net8.0\OutPutFileTask2.csv";
+            string path = @"C:\Users\berez\source\repos\Tyuiu.BerezovskiyAS.Sprint5\Tyuiu.BerezovskiyAS.Sprint5.Task2.V25\bin\Debug\net8.0\OutPutFileTask2.csv";
+
             FileInfo fileInfo = new FileInfo(path);
             bool fileExists = fileInfo.Exists;
             bool wait = true;
