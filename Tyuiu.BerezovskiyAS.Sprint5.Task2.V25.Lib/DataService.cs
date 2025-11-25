@@ -1,26 +1,28 @@
-﻿using tyuiu.cources.programming.interfaces.Sprint5;
-using System.IO;
+﻿using System.IO;
+using System.Text;
+using tyuiu.cources.programming.interfaces.Sprint5;
 namespace Tyuiu.BerezovskiyAS.Sprint5.Task2.V25.Lib
 {
     public class DataService : ISprint5Task2V25
     {
         public string SaveToFileTextData(int[,] matrix)
         {
-            string path = $@"{Directory.GetCurrentDirectory()}\OutPutFileTask2.csv";
+            string path = Path.Combine(new string[] { Path.GetTempPath(), "OutPutFileTask2.csv" });
 
-            FileInfo fileinf = new FileInfo(path);
-            bool fileExists = fileinf.Exists;
+            FileInfo fileInfo = new FileInfo(path);
+            bool fileExists = fileInfo.Exists;
 
-            if (fileExists == true)
+            if (fileExists)
             {
                 File.Delete(path);
             }
 
             int rows = matrix.GetUpperBound(0) + 1;
-            int cols = matrix.GetUpperBound(1) + 1;
+            int colums = matrix.Length / rows;
+
             for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < cols; j++)
+                for (int j = 0; j < colums; j++)
                 {
                     if (matrix[i, j] % 2 != 0)
                     {
@@ -28,13 +30,13 @@ namespace Tyuiu.BerezovskiyAS.Sprint5.Task2.V25.Lib
                     }
                 }
             }
-
             string str = "";
+
             for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < cols; j++)
+                for (int j = 0; j < colums; j++)
                 {
-                    if (j != cols - 1)
+                    if (j != colums - 1)
                     {
                         str = str + matrix[i, j] + ";";
                     }
@@ -43,7 +45,6 @@ namespace Tyuiu.BerezovskiyAS.Sprint5.Task2.V25.Lib
                         str = str + matrix[i, j];
                     }
                 }
-
                 if (i != rows - 1)
                 {
                     File.AppendAllText(path, str + Environment.NewLine);
@@ -54,7 +55,6 @@ namespace Tyuiu.BerezovskiyAS.Sprint5.Task2.V25.Lib
                 }
 
                 str = "";
-
 
             }
             return path;
